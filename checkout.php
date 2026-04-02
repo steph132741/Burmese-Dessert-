@@ -11,10 +11,10 @@ $grandTotal = $subtotal + $fee;
     <h2>Checkout</h2>
     <?php if (empty($items)): ?>
         <div class="notice">Your cart is empty. Add items before checking out.</div>
-        <a class="btn btn-primary" href="/burmese-desserts/shop.php">Go to Shop</a>
+        <a class="btn btn-primary" href="<?= asset_url('shop.php') ?>">Go to Shop</a>
     <?php else: ?>
         <div class="checkout-grid">
-            <form method="post" action="/burmese-desserts/actions/place_order.php">
+            <form method="post" action="<?= asset_url('actions/place_order.php') ?>">
                 <div class="form-group">
                     <label for="name">Full name</label>
                     <input id="name" name="name" required />
@@ -41,14 +41,20 @@ $grandTotal = $subtotal + $fee;
                 </div>
                 <div class="form-group">
                     <label>Pickup or Delivery</label>
-                    <div class="radio-group" style="display:grid;gap:0.6rem;">
-                        <label for="pickup">
+                    <div class="radio-group delivery-options">
+                        <label class="delivery-option" for="pickup">
                             <input id="pickup" type="radio" name="delivery_method" value="pickup" />
-                            Pickup (free)
+                            <span class="delivery-option-copy">
+                                <strong>Pickup</strong>
+                                <small>Free</small>
+                            </span>
                         </label>
-                        <label for="delivery">
+                        <label class="delivery-option" for="delivery">
                             <input id="delivery" type="radio" name="delivery_method" value="delivery" checked />
-                            Delivery (<?= format_money(DELIVERY_FEE) ?>, free over <?= format_money(FREE_DELIVERY_THRESHOLD) ?>)
+                            <span class="delivery-option-copy">
+                                <strong>Delivery</strong>
+                                <small><?= format_money(DELIVERY_FEE) ?>, free over <?= format_money(FREE_DELIVERY_THRESHOLD) ?></small>
+                            </span>
                         </label>
                     </div>
                 </div>
@@ -79,16 +85,7 @@ $grandTotal = $subtotal + $fee;
                 </div>
             </div>
         </div>
-        <?php if (GOOGLE_MAPS_API_KEY !== ''): ?>
-            <section class="section">
-                <h3>Track Your Location</h3>
-                <p>Allow location access to center the map near you.</p>
-                <div id="map" style="width:100%;height:320px;border-radius:16px;box-shadow:0 12px 24px rgba(43,26,22,0.12);"></div>
-            </section>
-            <script src="https://maps.googleapis.com/maps/api/js?key=<?= htmlspecialchars(GOOGLE_MAPS_API_KEY) ?>&callback=initMap" async defer></script>
-        <?php else: ?>
-            <div class="notice">Add your Google Maps API key in <code>config/bootstrap.php</code> to enable live location tracking.</div>
-        <?php endif; ?>
+        <div class="notice">Delivery is confirmed manually by our team after checkout. Use a clear township, landmark, and phone number so we can contact you quickly.</div>
     <?php endif; ?>
 </section>
 

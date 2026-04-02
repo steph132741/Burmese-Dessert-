@@ -56,6 +56,7 @@ try {
 
     $db->commit();
     $_SESSION['cart'] = [];
+    set_flash('success', 'Order placed. Save your tracking token: ' . $publicToken);
     header('Location: /burmese-desserts/order_status.php?token=' . $publicToken . '&success=1');
     exit;
 } catch (Throwable $e) {

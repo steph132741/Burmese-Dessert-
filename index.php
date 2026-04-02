@@ -9,8 +9,8 @@ $featured = $stmt->fetchAll();
         <h1>Handmade Burmese desserts with golden warmth and heritage.</h1>
         <p>From coconut-scented mont to flaky pastries, each bite is a celebration of tradition, crafted fresh in Yangon.</p>
         <div class="hero-cta">
-            <a class="btn btn-primary" href="/burmese-desserts/shop.php">Shop Desserts</a>
-            <a class="btn btn-secondary" href="/burmese-desserts/about.php">Our Story</a>
+            <a class="btn btn-primary" href="<?= asset_url('shop.php') ?>">Shop Desserts</a>
+            <a class="btn btn-secondary" href="<?= asset_url('about.php') ?>">Our Story</a>
         </div>
     </div>
     <div class="hero-card animate">
@@ -34,11 +34,11 @@ $featured = $stmt->fetchAll();
                 <?php if ($product['is_featured']): ?>
                     <span class="badge">Featured</span>
                 <?php endif; ?>
-                <img src="/burmese-desserts/<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" />
+                <img src="<?= htmlspecialchars(product_image_url($product['image'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" />
                 <h3><?= htmlspecialchars($product['name']) ?></h3>
                 <p><?= htmlspecialchars($product['short_description']) ?></p>
                 <div class="price"><?= format_money($product['price']) ?></div>
-                <form class="add-to-cart" method="post" action="/burmese-desserts/actions/add_to_cart.php">
+                <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
                     <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
                     <button class="btn btn-primary" type="submit">Add to Cart</button>
                 </form>
@@ -56,7 +56,7 @@ $featured = $stmt->fetchAll();
         <div class="hero-card">
             <h3>Visit the atelier</h3>
             <p>Stop by for warm mont let saung, fresh lotus tea, and gift boxes for loved ones.</p>
-            <a class="btn btn-secondary" href="/burmese-desserts/contact.php">Plan a visit</a>
+            <a class="btn btn-secondary" href="<?= asset_url('contact.php') ?>">Plan a visit</a>
         </div>
     </div>
 </section>

@@ -8,7 +8,7 @@ $stmt->execute([$id]);
 $order = $stmt->fetch();
 
 if (!$order) {
-    header('Location: /burmese-desserts/admin/orders.php');
+    header('Location: ' . asset_url('admin/orders.php'));
     exit;
 }
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $insert->execute([$id, trim($_POST['subject']), trim($_POST['message'])]);
     }
 
-    header('Location: /burmese-desserts/admin/order_view.php?id=' . $id);
+    header('Location: ' . asset_url('admin/order_view.php') . '?id=' . $id);
     exit;
 }
 
@@ -42,15 +42,17 @@ $messages = $msgStmt->fetchAll();
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Order #<?= (int)$order['id'] ?></title>
-    <link rel="stylesheet" href="/burmese-desserts/assets/css/styles.css" />
+    <link rel="stylesheet" href="<?= asset_url('assets/css/styles.css') ?>" />
 </head>
 <body>
     <main class="section">
         <div class="banner">
             <h2>Order #<?= (int)$order['id'] ?></h2>
-            <p>Status: <?= htmlspecialchars($order['status']) ?></p>
-            <p>Public link: <a href="/burmese-desserts/order_status.php?token=<?= htmlspecialchars($order['public_token']) ?>" target="_blank">Open customer status</a></p>
-        </div>
+        <p>Status: <?= htmlspecialchars($order['status']) ?></p>
+        <p>Tracking token: <strong><?= htmlspecialchars($order['public_token']) ?></strong></p>
+        <p>Public link: <a href="<?= asset_url('order_status.php') ?>?token=<?= htmlspecialchars($order['public_token']) ?>" target="_blank">Open customer status</a></p>
+        <button class="btn btn-secondary" type="button" data-copy-text="<?= htmlspecialchars(asset_url('order_status.php') . '?token=' . $order['public_token']) ?>">Copy customer tracking link</button>
+    </div>
 
         <div class="checkout-grid">
             <div>
@@ -120,7 +122,8 @@ $messages = $msgStmt->fetchAll();
                 <?php endif; ?>
             </div>
         </div>
-        <p style="margin-top:1rem;"><a href="/burmese-desserts/admin/orders.php">Back</a></p>
+        <p style="margin-top:1rem;"><a href="<?= asset_url('admin/orders.php') ?>">Back</a></p>
     </main>
+    <script src="<?= asset_url('assets/js/app.js') ?>"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?= APP_NAME ?></title>
-    <link rel="stylesheet" href="/burmese-desserts/assets/css/styles.css" />
+    <link rel="stylesheet" href="<?= asset_url('assets/css/styles.css') ?>" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,15 +13,15 @@
 <body>
     <header class="site-header">
         <div class="nav-wrap">
-            <a class="logo" href="/burmese-desserts/index.php">
-                <img class="logo-icon" src="/burmese-desserts/assets/img/logo-lotus.svg" alt="Golden Lotus logo" />
+            <a class="logo" href="<?= asset_url('index.php') ?>">
+                <img class="logo-icon" src="<?= asset_url('assets/img/logo-lotus.svg') ?>" alt="Golden Lotus logo" />
                 <span class="logo-text">Golden Lotus</span>
             </a>
             <nav class="nav-links">
-                <a href="/burmese-desserts/shop.php">Shop</a>
-                <a href="/burmese-desserts/about.php">Story</a>
-                <a href="/burmese-desserts/contact.php">Contact</a>
-                <a class="cart-pill" href="/burmese-desserts/cart.php">Cart <span><?= cart_count() ?></span></a>
+                <a href="<?= asset_url('shop.php') ?>">Shop</a>
+                <a href="<?= asset_url('about.php') ?>">Story</a>
+                <a href="<?= asset_url('contact.php') ?>">Contact</a>
+                <a class="cart-pill" href="<?= asset_url('cart.php') ?>">Cart <span><?= cart_count() ?></span></a>
             </nav>
         </div>
     </header>

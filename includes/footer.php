@@ -7,18 +7,19 @@
             </div>
             <div>
                 <h4>Visit</h4>
-                <p>No. 88 Shwe Dagon Rd, Yangon</p>
-                <p>Daily 9:00am - 8:00pm</p>
+                <p><?= htmlspecialchars(STORE_ADDRESS) ?></p>
+                <p><?= htmlspecialchars(STORE_HOURS) ?></p>
             </div>
             <div>
                 <h4>Contact</h4>
-                <p>hello@goldenlotus.mm</p>
-                <p>+95 9 700 123 456</p>
+                <p><?= htmlspecialchars(STORE_EMAIL) ?></p>
+                <p><?= htmlspecialchars(STORE_PHONE) ?></p>
+                <p><a href="<?= asset_url('order_status.php') ?>">Track an order</a></p>
             </div>
         </div>
         <p class="tiny">© <?= date('Y') ?> Golden Lotus. All rights reserved.</p>
     </footer>
     <div id="toast" class="toast"></div>
-    <script src="/burmese-desserts/assets/js/app.js"></script>
+    <script src="<?= asset_url('assets/js/app.js') ?>"></script>
 </body>
 </html>

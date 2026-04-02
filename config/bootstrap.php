@@ -7,12 +7,16 @@ define('CURRENCY', 'MMK');
 
 define('CURRENCY_SYMBOL', 'Ks');
 
+define('BASE_PATH', '/burmese-desserts');
+
+define('STORE_EMAIL', 'orders@goldenlotusdesserts.mm');
+define('STORE_PHONE', '+95 9 777 880 221');
+define('STORE_ADDRESS', 'No. 42 Merchant Street, Kyauktada Township, Yangon');
+define('STORE_HOURS', 'Daily 9:00am - 7:30pm');
+
 // Delivery settings
 define('DELIVERY_FEE', 2000);
 define('FREE_DELIVERY_THRESHOLD', 30000);
-
-// Google Maps API key (optional). Set to enable map on checkout.
-define('GOOGLE_MAPS_API_KEY', '');
 
 function db()
 {
@@ -116,4 +120,27 @@ function delivery_fee(string $method, float $subtotal): float
         return 0;
     }
     return DELIVERY_FEE;
+}
+
+function asset_url(string $path): string
+{
+    $cleanPath = ltrim($path, '/');
+    return BASE_PATH . '/' . $cleanPath;
+}
+
+function product_image_url(?string $path): string
+{
+    $path = trim((string)$path);
+    if ($path === '') {
+        return asset_url('assets/img/mont-let-saung.svg');
+    }
+    if (preg_match('#^https?://#i', $path)) {
+        return $path;
+    }
+    $url = asset_url($path);
+    $absolutePath = dirname(__DIR__) . '/' . ltrim($path, '/');
+    if (is_file($absolutePath)) {
+        return $url . '?v=' . filemtime($absolutePath);
+    }
+    return $url;
 }

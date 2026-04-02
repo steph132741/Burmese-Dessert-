@@ -8,7 +8,7 @@
    `http://localhost/burmese-desserts/`
 5. Create the admin account by visiting:
    `http://localhost/burmese-desserts/admin/seed_admin.php`
-
+ 
 ## If You Already Imported The DB
 Run this in phpMyAdmin SQL tab to add delivery fields:
 ```sql
