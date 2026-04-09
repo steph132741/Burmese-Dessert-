@@ -74,6 +74,11 @@ $orders = $stmt->fetchAll();
                         <td><a href="<?= asset_url('admin/order_view.php') ?>?id=<?= (int)$order['id'] ?>">View</a></td>
                     </tr>
                 <?php endforeach; ?>
+                <?php if (empty($orders)): ?>
+                    <tr>
+                        <td colspan="6">No orders found yet.</td>
+                    </tr>
+                <?php endif; ?>
             </tbody>
         </table>
         <p style="margin-top:1rem;"><a href="<?= asset_url('admin/index.php') ?>">Back</a></p>

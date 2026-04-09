@@ -46,7 +46,7 @@ $featured = $stmt->fetchAll();
         <?php endforeach; ?>
     </div>
 </section>
-
+ 
 <section class="section">
     <div class="checkout-grid">
         <div>

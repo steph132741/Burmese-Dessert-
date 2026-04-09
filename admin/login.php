@@ -16,9 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $admin = $stmt->fetch();
 
     if ($admin && password_verify($password, $admin['password_hash'])) {
-        $_SESSION['admin_id'] = $admin['id'];
-        $_SESSION['admin_name'] = $admin['username'];
-        header('Location: /burmese-desserts/admin/index.php');
+        login_admin($admin);
+        header('Location: ' . asset_url('admin/index.php'));
         exit;
     }
 
@@ -31,12 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Admin Login</title>
-    <link rel="stylesheet" href="/burmese-desserts/assets/css/styles.css" />
+    <link rel="stylesheet" href="<?= asset_url('assets/css/styles.css') ?>" />
 </head>
 <body>
-    <main class="section">
-        <div class="hero-card" style="max-width:420px;margin:2rem auto;">
+    <main class="section auth-shell auth-shell-admin">
+        <div class="auth-card hero-card">
+            <p class="admin-eyebrow">Admin Panel</p>
             <h2>Admin Login</h2>
+            <p>Sign in to manage orders, products, and customer messages.</p>
             <?php if ($error): ?>
                 <div class="flash flash-error"><?= htmlspecialchars($error) ?></div>
             <?php endif; ?>
@@ -49,9 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="password">Password</label>
                     <input id="password" name="password" type="password" required />
                 </div>
-                <button class="btn btn-primary" type="submit">Sign in</button>
+                <button class="btn btn-primary auth-submit" type="submit">Login to Admin</button>
             </form>
+            <a class="auth-back-link" href="<?= asset_url('login.php') ?>">Back to User Login</a>
         </div>
     </main>
+    <script src="<?= asset_url('assets/js/app.js') ?>"></script>
 </body>
 </html>

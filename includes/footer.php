@@ -14,7 +14,6 @@
                 <h4>Contact</h4>
                 <p><?= htmlspecialchars(STORE_EMAIL) ?></p>
                 <p><?= htmlspecialchars(STORE_PHONE) ?></p>
-                <p><a href="<?= asset_url('order_status.php') ?>">Track an order</a></p>
             </div>
         </div>
         <p class="tiny">© <?= date('Y') ?> Golden Lotus. All rights reserved.</p>

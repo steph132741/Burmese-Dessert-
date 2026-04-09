@@ -28,7 +28,7 @@ if ($order) {
     <div class="banner">
         <h2>Order Status</h2>
         <?php if ($success): ?>
-            <p><strong>Your order was placed successfully.</strong></p>
+            <p><strong>Your order has been received and is now being prepared.</strong></p>
         <?php endif; ?>
         <p>Enter your tracking token from checkout to see the latest status and messages from the shop.</p>
     </div>

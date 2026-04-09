@@ -9,8 +9,17 @@ function showToast(message) {
     }
     toastEl.textContent = message;
     toastEl.classList.add('show');
-    setTimeout(() => toastEl.classList.remove('show'), 2500);
+    setTimeout(() => toastEl.classList.remove('show'), 5000);
 }
+
+document.querySelectorAll('.flash').forEach((flash) => {
+    setTimeout(() => {
+        flash.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        flash.style.opacity = '0';
+        flash.style.transform = 'translateY(-6px)';
+        setTimeout(() => flash.remove(), 350);
+    }, 5000);
+});
 
 document.querySelectorAll('form.add-to-cart').forEach((form) => {
     form.addEventListener('submit', async (event) => {
@@ -133,7 +142,7 @@ document.querySelectorAll('[data-copy-text]').forEach((button) => {
         }
     });
 });
-
+ 
 const salesChart = document.getElementById('sales-chart');
 if (salesChart) {
     salesChart.width = Math.max(salesChart.clientWidth, 320);

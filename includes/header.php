@@ -21,6 +21,12 @@
                 <a href="<?= asset_url('shop.php') ?>">Shop</a>
                 <a href="<?= asset_url('about.php') ?>">Story</a>
                 <a href="<?= asset_url('contact.php') ?>">Contact</a>
+                <?php if (is_user_logged_in()): ?>
+                    <a href="<?= asset_url('logout.php') ?>">Logout</a>
+                <?php else: ?>
+                    <a href="<?= asset_url('login.php') ?>">Login</a>
+                    <a href="<?= asset_url('register.php') ?>">Register</a>
+                <?php endif; ?>
                 <a class="cart-pill" href="<?= asset_url('cart.php') ?>">Cart <span><?= cart_count() ?></span></a>
             </nav>
         </div>
@@ -30,4 +36,4 @@
             <div class="flash flash-<?= htmlspecialchars($flash['type']) ?>">
                 <?= htmlspecialchars($flash['message']) ?>
             </div>
-        <?php endif; ?>
+        <?php endif; ?> 

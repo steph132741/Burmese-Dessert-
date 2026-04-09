@@ -79,6 +79,11 @@ a {
 
 .nav-links a {
     font-weight: 500;
+    transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--jade);
 }
 
 .cart-pill {
@@ -211,6 +216,13 @@ a {
 
 .shop-search label {
     font-weight: 600;
+}
+
+.shop-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    align-items: center;
 }
 
 .shop-filter-row {
@@ -424,7 +436,7 @@ input, textarea, select {
     padding: 0.9rem 1.1rem;
     background: rgba(59, 122, 107, 0.15);
     border-radius: 12px;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; 
 }
 
 .flash {
@@ -671,6 +683,70 @@ input, textarea, select {
 
 .admin-link-card span {
     color: rgba(43, 26, 22, 0.7);
+}
+
+.auth-shell {
+    display: grid;
+    place-items: center;
+    min-height: 78vh;
+}
+
+.auth-shell-admin {
+    max-width: none;
+    background: linear-gradient(180deg, rgba(43, 26, 22, 0.95), rgba(24, 16, 13, 0.95));
+}
+
+.auth-card {
+    width: min(100%, 420px);
+}
+
+.auth-card h2 {
+    margin-bottom: 0.5rem;
+}
+
+.auth-submit {
+    width: 100%;
+}
+
+.auth-meta {
+    margin-top: 1rem;
+    text-align: center;
+    color: rgba(43, 26, 22, 0.72);
+}
+
+.auth-meta a,
+.auth-back-link {
+    color: var(--jade);
+    font-weight: 600;
+    transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.auth-meta a:hover,
+.auth-back-link:hover {
+    color: var(--gold);
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.auth-alt {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+
+.auth-back-link {
+    display: inline-flex;
+    margin-top: 1rem;
+}
+
+.admin-message-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.admin-message-status {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
 }
 
 @keyframes fadeUp {

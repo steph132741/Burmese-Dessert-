@@ -67,6 +67,7 @@ foreach ($topProducts as $product) {
             <div class="admin-hero-actions">
                 <a class="btn btn-primary" href="<?= asset_url('admin/products.php') ?>">Manage Products</a>
                 <a class="btn btn-secondary" href="<?= asset_url('admin/orders.php') ?>">Manage Orders</a>
+                <a class="btn btn-secondary" href="<?= asset_url('admin/messages.php') ?>">Customer Messages</a>
                 <a class="btn btn-secondary" href="<?= asset_url('shop.php') ?>" target="_blank">View Shop</a>
                 <a class="btn btn-secondary" href="<?= asset_url('admin/logout.php') ?>">Logout</a>
             </div>
@@ -123,6 +124,10 @@ foreach ($topProducts as $product) {
                 <a class="admin-link-card" href="<?= asset_url('admin/orders.php') ?>">
                     <strong>Review Orders</strong>
                     <span>Check the latest customer activity and update order status.</span>
+                </a>
+                <a class="admin-link-card" href="<?= asset_url('admin/messages.php') ?>">
+                    <strong>Customer Messages</strong>
+                    <span>Read contact form messages and keep track of replies.</span>
                 </a>
                 <a class="admin-link-card" href="<?= asset_url('shop.php') ?>" target="_blank">
                     <strong>Open Shop</strong>

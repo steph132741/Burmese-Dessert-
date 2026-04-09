@@ -1,10 +1,13 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+require_once __DIR__ . '/config/bootstrap.php';
+require_user_login();
+$user = current_user();
 $items = get_cart_items();
 $subtotal = cart_total();
 $selectedMethod = 'delivery';
 $fee = delivery_fee($selectedMethod, $subtotal);
 $grandTotal = $subtotal + $fee;
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <section class="section">
@@ -17,15 +20,15 @@ $grandTotal = $subtotal + $fee;
             <form method="post" action="<?= asset_url('actions/place_order.php') ?>">
                 <div class="form-group">
                     <label for="name">Full name</label>
-                    <input id="name" name="name" required />
+                    <input id="name" name="name" value="<?= htmlspecialchars($user['name'] ?? '') ?>" required />
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" required />
+                    <input id="email" name="email" type="email" value="<?= htmlspecialchars($user['email'] ?? '') ?>" required />
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input id="phone" name="phone" required />
+                    <input id="phone" name="phone" value="<?= htmlspecialchars($user['phone'] ?? '') ?>" required />
                 </div>
                 <div class="form-group delivery-field">
                     <label for="address">Delivery address</label>
