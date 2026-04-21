@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/includes/header.php';
+ensure_cart_stock_limits();
 $items = get_cart_items();
 ?>
 
@@ -16,6 +17,7 @@ $items = get_cart_items();
                         <th>Dessert</th>
                         <th>Price</th>
                         <th>Qty</th>
+                        <th>Stock</th>
                         <th>Total</th>
                         <th></th>
                     </tr>
@@ -26,8 +28,9 @@ $items = get_cart_items();
                             <td><?= htmlspecialchars($item['product']['name']) ?></td>
                             <td><?= format_money($item['product']['price']) ?></td>
                             <td>
-                                <input type="number" name="qty[<?= (int)$item['product']['id'] ?>]" min="1" value="<?= (int)$item['qty'] ?>" />
+                                <input type="number" name="qty[<?= (int)$item['product']['id'] ?>]" min="1" max="<?= (int)$item['product']['stock'] ?>" value="<?= (int)$item['qty'] ?>" />
                             </td>
+                            <td><?= htmlspecialchars(stock_label($item['product'])) ?></td>
                             <td><?= format_money($item['line_total']) ?></td>
                             <td>
                                 <a href="/burmese-desserts/actions/remove_from_cart.php?id=<?= (int)$item['product']['id'] ?>">Remove</a>

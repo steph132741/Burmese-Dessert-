@@ -22,14 +22,21 @@ if (!$product) {
             <h2><?= htmlspecialchars($product['name']) ?></h2>
             <p><?= htmlspecialchars($product['description']) ?></p>
             <p class="price"><?= format_money($product['price']) ?></p>
-            <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
-                <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
-                <div class="form-group">
-                    <label for="qty">Quantity</label>
-                    <input id="qty" name="qty" type="number" min="1" value="1" />
-                </div>
-                <button class="btn btn-primary" type="submit">Add to Cart</button>
-            </form>
+            <p class="stock-pill <?= (int)$product['stock'] <= LOW_STOCK_THRESHOLD ? 'stock-pill-low' : '' ?> <?= (int)$product['stock'] <= 0 ? 'stock-pill-out' : '' ?>">
+                <?= htmlspecialchars(stock_label($product)) ?>
+            </p>
+            <?php if ((int)$product['stock'] > 0): ?>
+                <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
+                    <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
+                    <div class="form-group">
+                        <label for="qty">Quantity</label>
+                        <input id="qty" name="qty" type="number" min="1" max="<?= (int)$product['stock'] ?>" value="1" />
+                    </div>
+                    <button class="btn btn-primary" type="submit">Add to Cart</button>
+                </form>
+            <?php else: ?>
+                <div class="notice">This dessert is currently out of stock.</div>
+            <?php endif; ?>
         </div>
     </div>
 </section>

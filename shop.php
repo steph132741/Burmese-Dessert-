@@ -73,10 +73,17 @@ $products = $stmt->fetchAll();
                 <h3><?= htmlspecialchars($product['name']) ?></h3>
                 <p><?= htmlspecialchars($product['short_description']) ?></p>
                 <div class="price"><?= format_money($product['price']) ?></div>
-                <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
-                    <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
-                    <button class="btn btn-primary" type="submit">Add to Cart</button>
-                </form>
+                <p class="stock-pill <?= (int)$product['stock'] <= LOW_STOCK_THRESHOLD ? 'stock-pill-low' : '' ?> <?= (int)$product['stock'] <= 0 ? 'stock-pill-out' : '' ?>">
+                    <?= htmlspecialchars(stock_label($product)) ?>
+                </p>
+                <?php if ((int)$product['stock'] > 0): ?>
+                    <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
+                        <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
+                        <button class="btn btn-primary" type="submit">Add to Cart</button>
+                    </form>
+                <?php else: ?>
+                    <button class="btn btn-secondary" type="button" disabled>Out of Stock</button>
+                <?php endif; ?>
             </article>
         <?php endforeach; ?>
     </div>

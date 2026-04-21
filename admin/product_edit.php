@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data['stock'],
                 $id
             ]);
-            set_flash('success', 'Product updated and live on the shop now.');
+            set_flash('success', 'Product information successfully updated.');
             header('Location: ' . asset_url('admin/product_edit.php') . '?id=' . $id . '&saved=1');
             exit;
         } else {

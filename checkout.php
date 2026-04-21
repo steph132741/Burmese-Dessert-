@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/config/bootstrap.php';
 require_user_login();
+ensure_cart_stock_limits();
 $user = current_user();
 $items = get_cart_items();
 $subtotal = cart_total();

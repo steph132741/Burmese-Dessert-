@@ -10,6 +10,7 @@ $summary = [
     'completed_orders' => 0,
 ];
 $topProducts = [];
+$lowStockProducts = [];
 
 try {
     $orderColumns = $db->query('SHOW COLUMNS FROM orders')->fetchAll(PDO::FETCH_COLUMN);
@@ -39,6 +40,14 @@ try {
     }
 } catch (Throwable $e) {
     $topProducts = [];
+}
+
+try {
+    $stmt = $db->prepare('SELECT id, name, stock FROM products WHERE stock <= ? ORDER BY stock ASC, name ASC LIMIT 6');
+    $stmt->execute([LOW_STOCK_THRESHOLD]);
+    $lowStockProducts = $stmt->fetchAll();
+} catch (Throwable $e) {
+    $lowStockProducts = [];
 }
 
 $chartLabels = [];
@@ -133,6 +142,17 @@ foreach ($topProducts as $product) {
                     <strong>Open Shop</strong>
                     <span>Preview the customer-facing storefront in a new tab.</span>
                 </a>
+                <?php if (!empty($lowStockProducts)): ?>
+                    <div class="admin-link-card low-stock-card">
+                        <strong>Low Stock Alert</strong>
+                        <span>These desserts are running low:</span>
+                        <ul class="low-stock-list">
+                            <?php foreach ($lowStockProducts as $product): ?>
+                                <li><?= htmlspecialchars($product['name']) ?> — <?= (int)$product['stock'] ?> left</li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
     </main>

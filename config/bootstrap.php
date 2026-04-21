@@ -23,6 +23,7 @@ define('STORE_HOURS', 'Daily 9:00am - 7:30pm');
 // Delivery settings
 define('DELIVERY_FEE', 2000);
 define('FREE_DELIVERY_THRESHOLD', 30000);
+define('LOW_STOCK_THRESHOLD', 5);
 
 function db()
 {
@@ -223,6 +224,51 @@ function get_cart_items(): array
     }
 
     return $items;
+}
+
+function stock_label(array $product): string
+{
+    $stock = max(0, (int)($product['stock'] ?? 0));
+    if ($stock <= 0) {
+        return 'Out of stock';
+    }
+    if ($stock <= LOW_STOCK_THRESHOLD) {
+        return 'Only ' . $stock . ' left';
+    }
+    return $stock . ' in stock';
+}
+
+function ensure_cart_stock_limits(): void
+{
+    if (empty($_SESSION['cart'])) {
+        return;
+    }
+
+    $items = get_cart_items();
+    $validIds = [];
+    foreach ($items as $item) {
+        $product = $item['product'];
+        $validIds[] = (int)$product['id'];
+        $available = max(0, (int)$product['stock']);
+        $qty = (int)$item['qty'];
+
+        if ($available <= 0) {
+            unset($_SESSION['cart'][$product['id']]);
+            set_flash('error', 'Sorry, ' . $product['name'] . ' is currently out of stock.');
+            continue;
+        }
+
+        if ($qty > $available) {
+            $_SESSION['cart'][$product['id']] = $available;
+            set_flash('error', 'Sorry, only ' . $available . ' left in stock.');
+        }
+    }
+
+    foreach (array_keys($_SESSION['cart']) as $productId) {
+        if (!in_array((int)$productId, $validIds, true)) {
+            unset($_SESSION['cart'][$productId]);
+        }
+    }
 }
 
 function cart_total(): float

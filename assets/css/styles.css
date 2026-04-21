@@ -288,6 +288,29 @@ a {
     color: var(--jade);
 }
 
+.stock-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.7rem;
+    margin: 0.75rem 0 1rem;
+    border-radius: 999px;
+    background: rgba(59, 122, 107, 0.12);
+    color: var(--jade);
+    font-weight: 700;
+    font-size: 0.92rem;
+}
+
+.stock-pill-low {
+    background: rgba(201, 138, 28, 0.14);
+    color: #9b6510;
+}
+
+.stock-pill-out {
+    background: rgba(215, 122, 95, 0.14);
+    color: #a0462d;
+}
+
 .badge {
     position: absolute;
     top: 14px;
@@ -683,6 +706,16 @@ input, textarea, select {
 
 .admin-link-card span {
     color: rgba(43, 26, 22, 0.7);
+}
+
+.low-stock-card {
+    background: rgba(201, 138, 28, 0.12);
+}
+
+.low-stock-list {
+    margin: 0.5rem 0 0;
+    padding-left: 1rem;
+    color: rgba(43, 26, 22, 0.85);
 }
 
 .auth-shell {
