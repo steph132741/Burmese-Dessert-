@@ -14,19 +14,23 @@ if (!$product) {
 ?>
 
 <section class="section">
-    <div class="checkout-grid">
-        <div>
-            <img style="width:100%;border-radius:20px;box-shadow:0 18px 36px rgba(43,26,22,0.12);" src="<?= htmlspecialchars(product_image_url($product['image'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" />
+    <div class="checkout-grid product-detail">
+        <div class="product-detail-media">
+            <img
+                class="product-detail-image"
+                src="<?= htmlspecialchars(product_image_url($product['image'])) ?>"
+                alt="<?= htmlspecialchars($product['name']) ?>"
+            />
         </div>
-        <div>
-            <h2><?= htmlspecialchars($product['name']) ?></h2>
-            <p><?= htmlspecialchars($product['description']) ?></p>
+        <div class="product-detail-content">
+            <h2 class="product-detail-title"><?= htmlspecialchars($product['name']) ?></h2>
+            <p class="product-detail-copy"><?= htmlspecialchars($product['description']) ?></p>
             <p class="price"><?= format_money($product['price']) ?></p>
             <p class="stock-pill <?= (int)$product['stock'] <= LOW_STOCK_THRESHOLD ? 'stock-pill-low' : '' ?> <?= (int)$product['stock'] <= 0 ? 'stock-pill-out' : '' ?>">
                 <?= htmlspecialchars(stock_label($product)) ?>
             </p>
             <?php if ((int)$product['stock'] > 0): ?>
-                <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
+                <form class="add-to-cart product-detail-form" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
                     <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
                     <div class="form-group">
                         <label for="qty">Quantity</label>

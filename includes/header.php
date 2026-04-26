@@ -17,7 +17,18 @@
                 <img class="logo-icon" src="<?= asset_url('assets/img/logo-lotus.svg') ?>" alt="Golden Lotus logo" />
                 <span class="logo-text">Golden Lotus</span>
             </a>
-            <nav class="nav-links">
+            <button
+                class="nav-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="site-nav"
+                aria-label="Open navigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav id="site-nav" class="nav-links">
                 <a href="<?= asset_url('shop.php') ?>">Shop</a>
                 <a href="<?= asset_url('about.php') ?>">Story</a>
                 <a href="<?= asset_url('contact.php') ?>">Contact</a>

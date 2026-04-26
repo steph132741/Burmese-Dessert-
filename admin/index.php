@@ -43,6 +43,8 @@ try {
 }
 
 try {
+    // Proactive inventory monitoring supports the business requirement for efficient stock control.
+    // Using the shared LOW_STOCK_THRESHOLD constant keeps the rule consistent and easy to maintain.
     $stmt = $db->prepare('SELECT id, name, stock FROM products WHERE stock <= ? ORDER BY stock ASC, name ASC LIMIT 6');
     $stmt->execute([LOW_STOCK_THRESHOLD]);
     $lowStockProducts = $stmt->fetchAll();

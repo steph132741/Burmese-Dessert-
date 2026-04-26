@@ -21,6 +21,36 @@ document.querySelectorAll('.flash').forEach((flash) => {
     }, 5000);
 });
 
+const navToggle = document.querySelector('.nav-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (navToggle && navLinks) {
+    const closeNav = () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('is-open');
+    };
+
+    navToggle.addEventListener('click', () => {
+        const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+        navToggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        navLinks.classList.toggle('is-open', !isOpen);
+    });
+
+    navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 760) {
+                closeNav();
+            }
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 760) {
+            closeNav();
+        }
+    });
+}
+
 document.querySelectorAll('form.add-to-cart').forEach((form) => {
     form.addEventListener('submit', async (event) => {
         event.preventDefault();

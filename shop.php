@@ -67,23 +67,29 @@ $products = $stmt->fetchAll();
                 <?php if ($product['is_featured']): ?>
                     <span class="badge">Featured</span>
                 <?php endif; ?>
-                <a href="<?= asset_url('product.php') ?>?id=<?= (int)$product['id'] ?>">
+                <a class="product-card-link" href="<?= asset_url('product.php') ?>?id=<?= (int)$product['id'] ?>">
                     <img src="<?= htmlspecialchars(product_image_url($product['image'])) ?>" alt="<?= htmlspecialchars($product['name']) ?>" />
                 </a>
-                <h3><?= htmlspecialchars($product['name']) ?></h3>
-                <p><?= htmlspecialchars($product['short_description']) ?></p>
-                <div class="price"><?= format_money($product['price']) ?></div>
-                <p class="stock-pill <?= (int)$product['stock'] <= LOW_STOCK_THRESHOLD ? 'stock-pill-low' : '' ?> <?= (int)$product['stock'] <= 0 ? 'stock-pill-out' : '' ?>">
-                    <?= htmlspecialchars(stock_label($product)) ?>
-                </p>
-                <?php if ((int)$product['stock'] > 0): ?>
-                    <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
-                        <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
-                        <button class="btn btn-primary" type="submit">Add to Cart</button>
-                    </form>
-                <?php else: ?>
-                    <button class="btn btn-secondary" type="button" disabled>Out of Stock</button>
-                <?php endif; ?>
+                <div class="product-card-body">
+                    <div class="product-card-summary">
+                        <h3><?= htmlspecialchars($product['name']) ?></h3>
+                        <p><?= htmlspecialchars($product['short_description']) ?></p>
+                    </div>
+                    <div class="product-card-footer">
+                        <div class="price"><?= format_money($product['price']) ?></div>
+                        <p class="stock-pill <?= (int)$product['stock'] <= LOW_STOCK_THRESHOLD ? 'stock-pill-low' : '' ?> <?= (int)$product['stock'] <= 0 ? 'stock-pill-out' : '' ?>">
+                            <?= htmlspecialchars(stock_label($product)) ?>
+                        </p>
+                        <?php if ((int)$product['stock'] > 0): ?>
+                            <form class="add-to-cart" method="post" action="<?= asset_url('actions/add_to_cart.php') ?>">
+                                <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>" />
+                                <button class="btn btn-primary" type="submit">Add to Cart</button>
+                            </form>
+                        <?php else: ?>
+                            <button class="btn btn-secondary" type="button" disabled>Out of Stock</button>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </article>
         <?php endforeach; ?>
     </div>
