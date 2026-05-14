@@ -546,6 +546,36 @@ input, textarea, select {
     gap: 2rem;
 }
 
+.footer-links {
+    max-width: var(--max);
+    margin: 1.5rem auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.4rem;
+    align-items: center;
+}
+
+.footer-link-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(243, 230, 213, 0.16);
+    background: rgba(255, 255, 255, 0.04);
+    color: #f3e6d5;
+    opacity: 0.92;
+    transition: color 0.2s ease, opacity 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-link-pill:hover {
+    color: #fff5df;
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(243, 230, 213, 0.28);
+}
+
 .tiny {
     text-align: center;
     margin-top: 1.5rem;
@@ -597,6 +627,61 @@ input, textarea, select {
 .toast.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+.cookie-banner {
+    position: fixed;
+    left: 50%;
+    bottom: 1.25rem;
+    transform: translateX(-50%);
+    width: min(calc(100% - 2rem), 980px);
+    background: rgba(31, 20, 17, 0.96);
+    color: #f7efe1;
+    border-radius: 22px;
+    box-shadow: 0 20px 40px rgba(26, 16, 12, 0.28);
+    z-index: 60;
+}
+
+.cookie-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+    padding: 1rem 1.2rem;
+}
+
+.cookie-banner-copy {
+    display: grid;
+    gap: 0.3rem;
+}
+
+.cookie-banner-copy strong {
+    font-size: 1rem;
+}
+
+.cookie-banner-copy p {
+    color: rgba(247, 239, 225, 0.9);
+}
+
+.cookie-banner-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.cookie-banner-actions .btn-secondary {
+    border-color: rgba(243, 230, 213, 0.55);
+    color: #f7efe1;
+}
+
+.legal-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.legal-card h3 {
+    margin-top: 0.6rem;
 }
 
 .radio-group label {
@@ -1025,6 +1110,30 @@ input, textarea, select {
     .results-copy {
         margin-bottom: 1.1rem;
         font-size: 0.95rem;
+    }
+
+    .footer-links {
+        gap: 0.75rem 1rem;
+    }
+
+    .cookie-banner {
+        width: calc(100% - 1.2rem);
+        bottom: 0.7rem;
+        border-radius: 18px;
+    }
+
+    .cookie-banner-inner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem;
+    }
+
+    .cookie-banner-actions {
+        width: 100%;
+    }
+
+    .cookie-banner-actions .btn {
+        width: 100%;
     }
 
     .product-grid {

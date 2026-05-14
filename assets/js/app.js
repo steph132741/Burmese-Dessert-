@@ -21,6 +21,37 @@ document.querySelectorAll('.flash').forEach((flash) => {
     }, 5000);
 });
 
+const cookieBanner = document.getElementById('cookie-banner');
+const cookieButtons = document.querySelectorAll('[data-cookie-action]');
+
+function getCookieValue(name) {
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const match = document.cookie.match(new RegExp(`(?:^|; )${escapedName}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : '';
+}
+
+function setCookieValue(name, value, days) {
+    const maxAge = days * 24 * 60 * 60;
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax`;
+}
+
+if (cookieBanner) {
+    const cookieUserRequired = cookieBanner.dataset.cookieUser === '1';
+    const consent = getCookieValue('gl_cookie_consent');
+    if (cookieUserRequired && !consent) {
+        cookieBanner.hidden = false;
+    }
+
+    cookieButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const action = button.dataset.cookieAction === 'accept' ? 'accepted' : 'declined';
+            setCookieValue('gl_cookie_consent', action, 365);
+            cookieBanner.hidden = true;
+            showToast(action === 'accepted' ? 'Cookie preferences saved.' : 'Non-essential cookies declined.');
+        });
+    });
+}
+
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
